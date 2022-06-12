@@ -146,6 +146,7 @@ Para a correta execução desse projeto são necessários os seguintes programas
 * **GCC** v8.xx.xx (ou superior) - (foi testado usando v12.1.0)
 * **GNU Make** v4.2 (ou superior) - (foi testado usando v4.3)
 * **CMake** (opt) v3.21.xx (ou superior) - (foi testado usando v12.1.0)
+* **Ninja** (opt) v1.8.xx (ou superior) - (foi testado usando v1.10.2)
 * **CLang** (opt) v8.xx.xx (ou superior) - (foi testado usando v13.0.1)
 * **Python** (opt) v3.8.xx (ou superior) - (foi testado usando v3.10.4)
 

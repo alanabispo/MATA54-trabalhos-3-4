@@ -27,7 +27,7 @@ clean:
 prepare: clean
 	mkdir -p $(CMAKE_BUILD_FOLDER) && \
 	cd $(CMAKE_BUILD_FOLDER) && \
-	cmake -DCMAKE_BUILD_TYPE=Debug ../
+	cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=ninja -G Ninja ../
 
 # Constrói de maneira alternativa sem a necessidade do cmake
 build-alt: main.c main_trab3.c
@@ -55,7 +55,7 @@ test: CMakeLists.txt main.c main_trab3.c main_test.c main_trab3_test.c
 
 # Ajuda - Adicionar sempre que houver novas dependências
 help:
-	@echo "Targets válidos para este Makefile:"
+	@echo "Targets validos para este Makefile:"
 	@echo "... start (default)"
 	@echo "... start-trabalho3 (default)"
 	@echo "... clean"
