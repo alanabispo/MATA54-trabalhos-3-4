@@ -46,11 +46,11 @@ clean-build: clean build
 clean-build-alt: clean build-alt
 
 # Realiza testes unitários utilizando um script simples de teste
-test-alt: main.c main_trab3.c main_test.c main_trab3_test.c
+test-alt: main.c main_trab3.c
 	# etah
 
 # Realiza testes utilizando a suite CMakeTest
-test: CMakeLists.txt main.c main_trab3.c main_test.c main_trab3_test.c
+test: CMakeLists.txt main.c main_trab3.c
 	# something something
 
 # Ajuda - Adicionar sempre que houver novas dependências

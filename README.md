@@ -190,6 +190,55 @@ z.txt
 
 ### -------- !!!!!!!!! TODO: EXPLICAR SOBRE OS TESTES UNITÁRIOS !!!!!!!!! --------
 
+## Anexos
+
+### Formato dos headers
+
+```c
+/**
+ * Explicação sucinta da estrutura
+ */
+
+#ifndef NOME_ESTRUTURA_H
+#define NOME_ESTRUTURA_H
+
+// ------------- Constantes ------------- //
+
+#include "constantes.h" // Inclui as outras constantes
+// TODO: Inclui as constantes utilizadas pela estrutura
+
+// ------------- Estruturas ------------- //
+
+// TODO: Definição de estruturas
+struct {
+    // TODO: Definir uma estrutura
+} TipoNomeEstrutura;
+
+// --------------- Metodos -------------- //
+
+// TODO: Definição dos metodos
+/**
+ * Documentação do método
+ */
+void metodoQualquer();
+
+#endif //NOME_ESTRUTURA_H
+```
+
+### Formato dos arquivos de source
+
+```c
+#include "nome_estrutura.h"
+// TODO: Adicionar outras bibliotecas utilizadas pela estrutura
+
+// TODO: Código fonte dos metodos
+
+// Método qualquer
+void metodoQualquer() {
+    // TODO: Definir código dos metodos
+}
+```
+
 ## Sobre o desenvolvimento
 
 Criado por **Alana Bispo** ([@alanabispo](https://github.com/alanabispo)) com <3 em **Salvador-BA** para a disciplina **MATA54**
