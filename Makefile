@@ -30,12 +30,12 @@ prepare: clean
 	cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=ninja -G Ninja ../
 
 # Constrói de maneira alternativa sem a necessidade do cmake
-build-alt: main.c main_trab3.c
+build-alt: test-alt main.c main_trab3.c
 	gcc -o MATA54-trabalho-3 main_trab3.c
 	gcc -o MATA54-trabalho-4 main.c
 
 # Constrói utilizando cmake
-build: CMakeLists.txt main.c main_trab3.c
+build: test CMakeLists.txt main.c main_trab3.c
 	cmake --build $(CMAKE_BUILD_FOLDER) --target MATA54-trabalho-3 && cp $(CMAKE_BUILD_FOLDER)/MATA54-trabalho-3 .
 	cmake --build $(CMAKE_BUILD_FOLDER) --target MATA54-trabalho-4 && cp $(CMAKE_BUILD_FOLDER)/MATA54-trabalho-4 .
 
@@ -47,11 +47,15 @@ clean-build-alt: clean build-alt
 
 # Realiza testes unitários utilizando um script simples de teste
 test-alt: main.c main_trab3.c
-	# etah
+	# TODO: Adicionar compilação e execução dos
 
 # Realiza testes utilizando a suite CMakeTest
 test: CMakeLists.txt main.c main_trab3.c
-	# something something
+	# TODO: Adicionar compilação e execução dos testes
+
+# Compacta o trabalho para entrega
+package:
+	git archive -o trabalho.zip HEAD
 
 # Ajuda - Adicionar sempre que houver novas dependências
 help:
