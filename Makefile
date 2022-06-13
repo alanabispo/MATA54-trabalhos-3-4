@@ -22,6 +22,7 @@ clean:
 	rm -rf $(CMAKE_BUILD_FOLDER)
 	rm -rf MATA54-trabalho-3 MATA54-trabalho-4
 	rm -rf ./*.dat
+	rm -rf ./trabalho.zip
 
 # Prepara o projeto
 prepare: clean
