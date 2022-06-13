@@ -60,13 +60,15 @@ encadeada simples, utilizando apenas um ponteiro para o próximo item da lista.
 
 ![exemplo arvore 2-d com páginas](docs/images/arvore-2d-paginas.png)
 
-##### **Figura 2.** Exemplo de estrutura similar
+##### **Figura 2.** Exemplo de árvore k-d com páginas
 
 É importante lembrar que como o único dado importante para cada nível é o item a ser comparado
 nossa estrutura de indices não irá conter nenhuma outra informação além do próprio índice, ou seja,
 nossa estrutura será semelhante à próxima imagem sem as informações do registro no nível:
 
 ![exemplo arvore 2-d com páginas com indice sem dados do registro](docs/images/arvore-2d-paginas-simples.png)
+
+##### **Figura 3.** Exemplo de árvore k-d com páginas com indíces simplificados
 
 Abaixo apresento as estruturas utilizadas para os **Registros**, **Índices** e **Páginas**:
 
@@ -186,6 +188,14 @@ familia
 z.txt
 ```
 
+## Comandos
+
+Nesta seção iremos definir todos os comandos aceitos pela aplicação em suas duas versões:
+
+### Comando 1...
+
+### -------- !!!!!!!!! TODO: EXPLICAR SOBRE OS COMANDOS DISPONÍVEIS !!!!!!!!! --------
+
 ## Testes
 
 ### -------- !!!!!!!!! TODO: EXPLICAR SOBRE OS TESTES UNITÁRIOS !!!!!!!!! --------
@@ -239,8 +249,39 @@ void metodoQualquer() {
 }
 ```
 
+### Formato dos arquivos de teste
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <assert.h>
+
+// ---------------- Mocks -------------- //
+
+// TODO: Adicionar Mocks
+
+// --------------- Testes -------------- //
+
+// TODO: Adicionar outros testes
+
+bool testCriarAlgo() {
+    // TODO: Adicionar corpo do teste
+}
+
+// --------------- Runner -------------- //
+
+int main() {
+    assert(testCriarAlgo());
+    // TODO: Adicionar chamada aos outros testes
+
+    return EXIT_SUCCESS;
+}
+```
+
 ## Sobre o desenvolvimento
 
 Criado por **Alana Bispo** ([@alanabispo](https://github.com/alanabispo)) com <3 em **Salvador-BA** para a disciplina **MATA54**
 (Estrutura de Dados e Algoritmos II) ministrada pelo professor **Flávio Assis** ([@fassis](http://www.academo.ufba.br/pesquisador.php?cod=1026))
-na **Universidade Federal da Bahia ([UFBA](https://ufba.br))**.
+durante o semestre **2022.1** na **Universidade Federal da Bahia ([UFBA](https://ufba.br))**.
