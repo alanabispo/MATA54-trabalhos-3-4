@@ -5,11 +5,11 @@
 #include <string.h>
 
 // Remove caracteres estranhos depois do primeiro caractere \0
-void removeCaracteresEstranhosString(char *str) {
+void removeCaracteresEstranhosString(char *str, int tamanho) {
     size_t i;
-    size_t tamanho_string = strnlen(str, TAMANHO_MAX_STRING + 1);
+    size_t tamanho_string = strnlen(str, tamanho);
 
-    for (i = tamanho_string; i < (TAMANHO_MAX_STRING + 1); i++) {
+    for (i = tamanho_string; i < tamanho; i++) {
         str[i] = '\0';
     }
 }

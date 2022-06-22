@@ -14,15 +14,16 @@ INICIA_TEST_FILE();
 
 // ---------------- Mocks -------------- //
 
-char str_vazia[] = "";
+char str_vazia[1];
 
-char str_completa[5] = "casa";
-char exp_str_completa[5] = "casa";
+char str_completa[5];
+const char exp_str_completa[] = "casa";
 
 // --------------- Testes -------------- //
 
 bool itDeveAceitarStringVazia(){
-    removeCaracteresEstranhosString(str_vazia);
+    strcpy(str_vazia, "");
+    removeCaracteresEstranhosString(str_vazia, 1);
 
     if(str_vazia[0] == '\0'){
         return true;
@@ -33,7 +34,9 @@ bool itDeveAceitarStringVazia(){
 }
 
 bool itDeveManterStringCompleta(){
-    removeCaracteresEstranhosString(str_completa);
+    strcpy(str_completa, "casa");
+    removeCaracteresEstranhosString(str_completa, 4);
+
     if(strncmp(str_completa, exp_str_completa, 4) == 0){
         return true;
     }
@@ -43,8 +46,10 @@ bool itDeveManterStringCompleta(){
 }
 
 bool testRemoveCaracteresEstranhosString() {
-    assert(itDeveAceitarStringVazia());
-    assert(itDeveManterStringCompleta());
+    assert(itDeveAceitarStringVazia()); // String de 1 caractere deve manter o mesmo
+    assert(itDeveManterStringCompleta()); // Uma string terminada em \0 não deve alterar nenhum valor
+    // Uma string com 1 caractere depois do \0 diferente do \0 deve ser removido
+    // Uma string com 2 caracteres \0 válidos deve remover todos os caracteres depois do primeiro \0
 
     return true;
 }

@@ -56,9 +56,10 @@ typedef enum {
 
 /**
  * Remove caracteres estranhos depois do primeiro caractere \0
- * @param str
+ * @param str string a ser corrigida
+ * @param tamanho tamanho da string
  */
-void removeCaracteresEstranhosString(char *str);
+void removeCaracteresEstranhosString(char *str, int tamanho);
 
 /**
  * Compara inteiros para ordenação crescente
