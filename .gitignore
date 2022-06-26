@@ -4,6 +4,12 @@ MATA54-trabalho-3
 MATA54-trabalho-4
 trabalho.zip
 
+# Log de teste
+tmp_log.txt
+
+# Alt build folder
+gcc-build-*/
+
 # Prerequisites
 *.d
 

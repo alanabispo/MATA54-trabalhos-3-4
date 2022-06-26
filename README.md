@@ -252,11 +252,24 @@ void metodoQualquer() {
 ### Formato dos arquivos de teste
 
 ```c
+#include "tests/test_lib.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <assert.h>
+
+#include "<SUA_LIB>.h"
+#include "constantes.h"
+
+// ---------------- Init --------------- //
+
+INICIA_TEST_FILE();
+
+// -------------- Helpers -------------- //
+
+// TODO Adicionar helpers
 
 // ---------------- Mocks -------------- //
 
