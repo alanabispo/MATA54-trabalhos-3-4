@@ -6,6 +6,7 @@ trabalho.zip
 
 # Log de teste
 tmp_log.txt
+out.txt
 
 # Alt build folder
 gcc-build-*/
