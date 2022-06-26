@@ -64,6 +64,11 @@ void removeArquivosTeste() {
     remove(PATH_ARQUIVO_TEMP);
 }
 
+// Desliga o teste
+void teardown() {
+    removeArquivosTeste();
+}
+
 // --------------- Testes -------------- //
 
 // Deve aceitar uma string vazia como input
@@ -213,6 +218,8 @@ int main() {
     assert(testRemoveCaracteresEstranhosString());
     assert(testCmpInteiro());
     assert(testTamanhoArquivo());
+
+    teardown();
 
     return EXIT_SUCCESS;
 }
