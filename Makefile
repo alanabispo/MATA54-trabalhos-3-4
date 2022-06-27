@@ -54,8 +54,8 @@ build-lib-alt: lib/registro.c lib/utils.c lib/pagina.c lib/arvore_2d.c
 # ALERTA: Testes removidos por não serem obrigatórios mas altamente recomendados
 # COMANDO: make test-alt build-alt
 build-alt: build-lib-alt main.c main_trab3.c
-	gcc -o MATA54-trabalho-3 main_trab3.c -L$(ALT_BUILD_FOLDER) -larvore_2d -lpagina -lregistro -lutils
-	gcc -o MATA54-trabalho-4 main.c -L$(ALT_BUILD_FOLDER) -larvore_2d -lpagina -lregistro -lutils
+	gcc -o MATA54-trabalho-3 main_trab3.c -L$(ALT_BUILD_FOLDER) -lutils -lregistro -lpagina -larvore_2d
+	gcc -o MATA54-trabalho-4 main.c -L$(ALT_BUILD_FOLDER) -lutils -lregistro -lpagina -larvore_2d
 
 # Constrói testes com cmake
 build-test: lib/registro_test.c lib/utils_test.c lib/pagina_test.c lib/arvore_2d_test.c
@@ -67,10 +67,10 @@ build-test-alt: build-lib-alt lib/registro_test.c lib/utils_test.c lib/pagina_te
 	gcc -c lib/tests/test_lib.c -o $(ALT_BUILD_FOLDER)/test_lib.o
 	ar rcs $(ALT_BUILD_FOLDER)/libtest_lib.a $(ALT_BUILD_FOLDER)/test_lib.o
 	# Compila testes
-	gcc lib/arvore_2d_test.c -o $(ALT_BUILD_FOLDER)/arvore_2d_test.o -L$(ALT_BUILD_FOLDER) -larvore_2d -lpagina -lregistro -lutils -ltest_lib
-	gcc lib/pagina_test.c -o $(ALT_BUILD_FOLDER)/pagina_test.o -L$(ALT_BUILD_FOLDER) -larvore_2d -lpagina -lregistro -lutils -ltest_lib
-	gcc lib/registro_test.c -o $(ALT_BUILD_FOLDER)/registro_test.o -L$(ALT_BUILD_FOLDER) -larvore_2d -lpagina -lregistro -lutils -ltest_lib
-	gcc lib/utils_test.c -o $(ALT_BUILD_FOLDER)/utils_test.o -L$(ALT_BUILD_FOLDER) -larvore_2d -lpagina -lregistro -lutils -ltest_lib
+	gcc lib/utils_test.c -o $(ALT_BUILD_FOLDER)/utils_test.o -L$(ALT_BUILD_FOLDER) -ltest_lib -lutils -lregistro -lpagina -larvore_2d
+	gcc lib/registro_test.c -o $(ALT_BUILD_FOLDER)/registro_test.o -L$(ALT_BUILD_FOLDER) -lutils -lregistro -lpagina -larvore_2d -ltest_lib
+	gcc lib/pagina_test.c -o $(ALT_BUILD_FOLDER)/pagina_test.o -L$(ALT_BUILD_FOLDER) -lpagina -lregistro -lutils -larvore_2d -ltest_lib
+	gcc lib/arvore_2d_test.c -o $(ALT_BUILD_FOLDER)/arvore_2d_test.o -L$(ALT_BUILD_FOLDER) -lpagina -lregistro -lutils -larvore_2d -ltest_lib
 
 # Constrói utilizando cmake
 build: test

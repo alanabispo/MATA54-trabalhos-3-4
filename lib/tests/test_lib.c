@@ -35,7 +35,6 @@ bool assertBufferStr(char *buf, size_t tam_buf, const char *exp_str) {
     return true;
 }
 
-
 // Le um registro de formato de saida padrão do arquivo
 Registro leRegistroStdoutFile(FILE *stdout_file) {
     Registro registro = newRegistro();

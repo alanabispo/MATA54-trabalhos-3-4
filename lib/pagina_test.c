@@ -8,6 +8,7 @@
 
 #include "constantes.h"
 #include "pagina.h"
+#include "registro.h"
 #include "utils.h"
 
 // ---------------- Init --------------- //

@@ -57,7 +57,7 @@ bool itDeveAceitarStringVazia(){
     cleanBuffer(str_buffer, TAMANHO_MAX_STRING);
     copyStrToBuffer(str_buffer, STR_VAZIA, 1);
 
-    removeCaracteresEstranhosString(str_buffer);
+    removeCaracteresEstranhosString(str_buffer, TAMANHO_MAX_STRING);
 
     return assertBufferStr(str_buffer, TAMANHO_MAX_STRING, STR_VAZIA);
 }
@@ -67,7 +67,7 @@ bool itDeveManterStringSemLixo(){
     cleanBuffer(str_buffer, TAMANHO_MAX_STRING);
     copyStrToBuffer(str_buffer, STR_2, 8);
 
-    removeCaracteresEstranhosString(str_buffer);
+    removeCaracteresEstranhosString(str_buffer, TAMANHO_MAX_STRING);
 
     return assertBufferStr(str_buffer, TAMANHO_MAX_STRING, STR_2);
 }
@@ -94,7 +94,7 @@ bool itDeveRemoverLixoString() {
     cleanBuffer(str_buffer, TAMANHO_MAX_STRING);
     copyStrToBuffer(str_buffer, STR_3_COM_LIXO, 8);
 
-    removeCaracteresEstranhosString(str_buffer);
+    removeCaracteresEstranhosString(str_buffer, TAMANHO_MAX_STRING);
 
     return assertBufferStr(str_buffer, TAMANHO_MAX_STRING, STR_3);
 }
@@ -104,7 +104,7 @@ bool itDeveRemoverLixoStringVazia() {
     cleanBuffer(str_buffer, TAMANHO_MAX_STRING);
     copyStrToBuffer(str_buffer, STR_4_COM_LIXO, 10);
 
-    removeCaracteresEstranhosString(str_buffer);
+    removeCaracteresEstranhosString(str_buffer, TAMANHO_MAX_STRING);
 
     return assertBufferStr(str_buffer, TAMANHO_MAX_STRING, STR_VAZIA);
 }
