@@ -2,6 +2,7 @@
 
 #include "pagina.h"
 #include "arvore_2d.h"
+#include "registro.h"
 #include "utils.h"
 
 #include <stdio.h>
