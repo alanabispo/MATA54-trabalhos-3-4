@@ -1,10 +1,8 @@
-#pragma ide diagnostic ignored "readability-non-const-parameter"
 #include "tests/test_lib.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include <assert.h>
 
 #include "utils.h"
@@ -30,25 +28,8 @@ INICIA_TEST_FILE();
     "sed eiusmod tempor incididunt magna aliqua."
 
 char str_buffer[TAMANHO_MAX_STRING + 1];
-char str_exp_buffer[TAMANHO_MAX_STRING + 1];
 
 // -------------- Helpers -------------- //
-
-// Verifica se a string tem o formato desejado
-bool assertBufferStr(char *buf, size_t tam_buf, const char *exp_str) {
-    size_t tam_exp = strlen(exp_str);
-    copyStrToBuffer(str_exp_buffer, exp_str, tam_exp);
-
-    int i;
-    for (i = 0; i < tam_buf; i++) {
-        if (
-            (i < tam_exp && buf[i] != exp_str[i]) ||
-            (i >= tam_exp && buf[i] != '\0')
-        ) return false;
-    }
-
-    return true;
-}
 
 // Grava string em formato binário no disco
 void gravaStringBinariaDisco(const char *filename, const char *str) {
