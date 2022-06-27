@@ -157,19 +157,17 @@ bool testNewPaginaRegistros() {
 bool itDeveCiarArquivoPaginas() {
     criarArquivoPaginas();
 
-    FILE *arquivo = fopen(PATH_ARQUIVO_TEMP, "r");
+    FILE *arquivo = fopen(PATH_ARQUIVO_PAGINAS, "r");
 
-    if (fseek(arquivo, 0, SEEK_END)) {
-        fclose(arquivo);
-        return ARQUIVO_TAMANHO_INVALIDO;
-    }
+    assert(arquivo != NULL);
+    assert(fseek(arquivo, 0, SEEK_END) != -1);
 
     size_t tamanho = ftell(arquivo);
     fclose(arquivo);
 
     removeArquivoPagina();
 
-    return arquivo != NULL && tamanho == TAMANHO_CABECALHO_PAGINAS();
+    return tamanho == TAMANHO_CABECALHO_PAGINAS();
 }
 
 // Testa criarArquivoPaginas()
@@ -256,11 +254,11 @@ int main(int argc, char *argv[]) {
     }
 
     // Testes que não dependem de stdout
-//    assert(testNewCabecalhoPaginasRegistros());
-//    assert(testNewPaginaRegistros());
-//    assert(testCriarArquivoPaginas());
-//    assert(testLeCabecalhoPaginasRegistros());
-//    assert(testGravaCabecalhoPaginas());
+    assert(testNewCabecalhoPaginasRegistros());
+    assert(testNewPaginaRegistros());
+    assert(testCriarArquivoPaginas());
+    assert(testLeCabecalhoPaginasRegistros());
+    assert(testGravaCabecalhoPaginas());
 
     return EXIT_SUCCESS;
 }

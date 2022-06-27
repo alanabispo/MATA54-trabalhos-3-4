@@ -38,6 +38,10 @@ CabecalhoPaginasRegistros newCabecalhoPaginasRegistros() {
 // Cria arquivo Páginas
 void criarArquivoPaginas() {
     FILE *arquivo = ABRIR_ARQUIVO_PAGINAS_ESCRITA();
+
+    CabecalhoPaginasRegistros cabecalho = newCabecalhoPaginasRegistros();
+    fwrite(&cabecalho, TAMANHO_CABECALHO_PAGINAS(), 1, arquivo);
+
     fclose(arquivo);
 }
 
@@ -51,6 +55,16 @@ CabecalhoPaginasRegistros leCabecalhoPaginasRegistros() {
 
     return cabecalho;
 }
+
+// Grava cabecalho paginas
+void gravaCabecalhoPaginas(CabecalhoPaginasRegistros *cabecalho) {
+    FILE *arquivo = ABRIR_ARQUIVO_PAGINAS_LEITURA_ESCRITA();
+
+    // Grava cabecalho dos registros
+    fwrite(cabecalho, TAMANHO_CABECALHO_PAGINAS(), 1, arquivo);
+    fclose(arquivo);
+}
+
 
 // Le pagina de registros do arquivo de páginas
 PaginaRegistros lePagina(int pos) {
@@ -68,15 +82,6 @@ PaginaRegistros lePagina(int pos) {
     fclose(arquivo);
 
     return pagina;
-}
-
-// Grava cabecalho paginas
-void gravaCabecalhoPaginas(CabecalhoPaginasRegistros *cabecalho) {
-    FILE *arquivo = ABRIR_ARQUIVO_PAGINAS_LEITURA_ESCRITA();
-
-    // Grava cabecalho dos registros
-    fwrite(cabecalho, TAMANHO_CABECALHO_PAGINAS(), 1, arquivo);
-    fclose(arquivo);
 }
 
 // Grava uma página de registros na memória
