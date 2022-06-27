@@ -18,6 +18,8 @@
 #define ARQUIVO_INEXISTENTE         (-1)
 #define ARQUIVO_TAMANHO_INVALIDO    (-2)
 
+#define REGISTRO_INEXISTENTE        (-2)
+
 #define ANO_VAZIO                   (-1)
 
 #define NIVEL_VAZIO                 (-1)
