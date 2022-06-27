@@ -10,6 +10,7 @@
 CMAKE_BUILD_FOLDER = ./cmake-build-debug
 ALT_BUILD_FOLDER = ./gcc-build-debug
 LOG_FILE = tmp_log.txt
+OUT_FILE = out.txt
 
 # Inicializa o trabalho 4
 start: build MATA54-trabalho-4
@@ -23,6 +24,8 @@ start-trabalho3: build MATA54-trabalho-3
 clean:
 	rm -rf $(CMAKE_BUILD_FOLDER)
 	rm -rf $(ALT_BUILD_FOLDER)
+	rm -rf $(LOG_FILE)
+	rm -rf $(OUT_FILE)
 	rm -rf MATA54-trabalho-3 MATA54-trabalho-4
 	rm -rf ./*.dat
 	rm -rf ./trabalho.zip
@@ -89,19 +92,31 @@ endef
 test-alt: build-lib-alt build-test-alt
 	@echo "Executando testes..."
 	@# Executa Testes
-	@printf "1/4 Test #1: arvore_2d --- " && \
+	@printf "1/10 Test #1: arvore_2d --- " && \
 	( ( $(ALT_BUILD_FOLDER)/arvore_2d_test.o 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
-	printf "2/4 Test #2: pagina_test --- " && \
+	printf "2/10 Test #3: arvore_2d_test --generate-stdout --- " && \
+	( ( $(ALT_BUILD_FOLDER)/arvore_2d_test.o --generate-stdout > $(OUT_FILE) 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
+	printf "3/10 Test #4: arvore_2d_test --test-generated-stdout --- " && \
+	( ( $(ALT_BUILD_FOLDER)/arvore_2d_test.o --test-generated-stdout 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
+	printf "4/10 Test #2: pagina_test --- " && \
 	( ( $(ALT_BUILD_FOLDER)/pagina_test.o 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
-	printf "3/4 Test #3: registro_test --- " && \
+	printf "5/10 Test #3: pagina_test --generate-stdout --- " && \
+	( ( $(ALT_BUILD_FOLDER)/pagina_test.o --generate-stdout > $(OUT_FILE) 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
+	printf "6/10 Test #4: pagina_test --test-generated-stdout --- " && \
+	( ( $(ALT_BUILD_FOLDER)/pagina_test.o --test-generated-stdout 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
+	printf "7/10 Test #5: registro_test --- " && \
 	( ( $(ALT_BUILD_FOLDER)/registro_test.o 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
-	printf "4/4 Test #4: utils_test --- " && \
+	printf "8/10 Test #3: registro_test --generate-stdout --- " && \
+	( ( $(ALT_BUILD_FOLDER)/registro_test.o --generate-stdout > $(OUT_FILE) 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
+	printf "9/10 Test #4: registro_test --test-generated-stdout --- " && \
+	( ( $(ALT_BUILD_FOLDER)/registro_test.o --test-generated-stdout 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
+	printf "10/10 Test #6: utils_test --- " && \
 	( ( $(ALT_BUILD_FOLDER)/utils_test.o 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
-	echo "Todos os testes passaram!"
+	echo "Todos os testes passaram!" && rm -rf $(LOG_FILE)
 
 # Realiza testes utilizando a suite CMakeTest
 test: build-test
-	ctest --extra-verbose --test-dir $(CMAKE_BUILD_FOLDER)
+	ctest --extra-verbose --output-on-failure --test-dir $(CMAKE_BUILD_FOLDER)
 
 # Compacta o trabalho para entrega
 package:
