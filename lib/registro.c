@@ -60,8 +60,24 @@ Registro leRegistroTmp(int pos) {
     FILE *arquivo = ABRIR_ARQUIVO_TMP_LEITURA();
     Registro registro = newRegistro();
 
+    // Verifica se o tamanho do arquivo
+    if (fseek(arquivo, 0, SEEK_END)) {
+        fclose(arquivo);
+        registro.ano = REGISTRO_INEXISTENTE;
+        return registro;
+    }
+
+    // Informa onde o ponteiro de leitura parou (esse é o tamanho do arquivo)
+    size_t tamanho = ftell(arquivo);
+
+    // Posição não existe no arquivo
+    if (tamanho < (TAMANHO_REGISTRO() * (pos + 1))){
+        registro.ano = REGISTRO_INEXISTENTE;
+        return registro;
+    }
+
     // Avança até a posição e grava
-    fseek(arquivo, TAMANHO_REGISTRO() * pos, SEEK_CUR);
+    fseek(arquivo, TAMANHO_REGISTRO() * pos, SEEK_SET);
     fread(&registro, TAMANHO_REGISTRO(), 1, arquivo);
 
     fclose(arquivo);

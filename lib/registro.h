@@ -74,6 +74,4 @@ void adicionarRegistroTmp(int pos, Registro *registro);
  */
 Registro leRegistroTmp(int pos);
 
-
-
 #endif //REGISTRO_H
