@@ -19,10 +19,10 @@ INICIA_TEST_FILE();
 const char stdout_filename[] = "out.txt";
 
 Registro registro_vazio = {
-    .nome_autor = "",
-    .ano = ANO_VAZIO,
-    .nome_arquivo = "",
-    .titulo = ""
+        .nome_autor = "",
+        .ano = ANO_VAZIO,
+        .nome_arquivo = "",
+        .titulo = ""
 };
 
 Registro registro_a = {
@@ -246,6 +246,9 @@ bool itDeveCriarArquivoTmp() {
     criarArquivoTmp();
 
     FILE *arquivo_tmp = fopen(PATH_ARQUIVO_TEMP, "r");
+    fclose(arquivo_tmp);
+    removeArquivoTmp();
+
     return arquivo_tmp != NULL;
 }
 

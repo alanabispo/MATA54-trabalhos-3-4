@@ -9,6 +9,7 @@
 #define ARVORE_2D_H
 
 #include "registro.h"
+#include "pagina.h"
 
 // ------------- Constantes ------------- //
 
@@ -144,6 +145,21 @@ void copiaNomeAutorIndice(NoIndice *indice, Registro *registro);
  * @param registro Registro a ser adicionado
  */
 void incluirIndice(int idx, Registro *registro);
+
+/**
+ * Salva o registro na página correta ou retorna a posição que encontrou o mesmo caso exista
+ *
+ * @param registro Registro a ser buscado
+ * @return Pagina e indice para salvar um documento
+ */
+LocalizacaoRegistroPagina salvaRegistroPagina(Registro *registro);
+
+/**
+ * Salva todas as páginas com os registros na lista de registros temporários
+ *
+ * @param n número de registros
+ */
+void moveRegistrosTmpPaginas(int n);
 
 /**
  * Imprime todos os indices em ordem

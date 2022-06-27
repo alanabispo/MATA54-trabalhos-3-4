@@ -70,19 +70,19 @@ void criarArquivoPaginas();
 CabecalhoPaginasRegistros leCabecalhoPaginasRegistros();
 
 /**
+ * Grava cabecalho paginas
+ *
+ * @param cabecalho Cabecalho a ser gravado
+ */
+void gravaCabecalhoPaginas(CabecalhoPaginasRegistros *cabecalho);
+
+/**
  * Le pagina de registros do arquivo de páginas
  *
  * @param pos posição do arquivo a ser lida
  * @return Página de registros obtida do arquivo
  */
 PaginaRegistros lePagina(int pos);
-
-/**
- * Grava cabecalho paginas
- *
- * @param cabecalho Cabecalho a ser gravado
- */
-void gravaCabecalhoPaginas(CabecalhoPaginasRegistros *cabecalho);
 
 /**
  * Grava uma página de registros na memória
@@ -98,21 +98,5 @@ void gravaPagina(int pos, PaginaRegistros *pagina);
  * @param pos
  */
 void imprimePagina(int pos);
-
-
-/**
- * Salva o registro na página correta ou retorna a posição que encontrou o mesmo caso exista
- *
- * @param registro Registro a ser buscado
- * @return Pagina e indice para salvar um documento
- */
-LocalizacaoRegistroPagina salvaRegistroPagina(Registro *registro);
-
-/**
- * Salva todas as páginas com os registros na lista de registros temporários
- *
- * @param n número de registros
- */
-void moveRegistrosTmpPaginas(int n);
 
 #endif //PAGINA_H

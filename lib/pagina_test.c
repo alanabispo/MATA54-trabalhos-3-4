@@ -153,9 +153,68 @@ bool testNewPaginaRegistros() {
     return true;
 }
 
+// Deve criar arquivo de páginas
+bool itDeveCiarArquivoPaginas() {
+    criarArquivoPaginas();
+
+    FILE *arquivo = fopen(PATH_ARQUIVO_TEMP, "r");
+
+    if (fseek(arquivo, 0, SEEK_END)) {
+        fclose(arquivo);
+        return ARQUIVO_TAMANHO_INVALIDO;
+    }
+
+    size_t tamanho = ftell(arquivo);
+    fclose(arquivo);
+
+    removeArquivoPagina();
+
+    return arquivo != NULL && tamanho == TAMANHO_CABECALHO_PAGINAS();
+}
+
 // Testa criarArquivoPaginas()
 bool testCriarArquivoPaginas() {
+    assert(itDeveCiarArquivoPaginas());
 
+    return true;
+}
+
+// Deve ler cabecalho vazio
+bool itDeveLerCabecalhoVazio() {
+    criarArquivoPaginas();
+    CabecalhoPaginasRegistros cabecalho = leCabecalhoPaginasRegistros();
+    removeArquivoPagina();
+
+    assert(cabecalho.n_registros == 0);
+    assert(cabecalho.total_paginas == 0);
+    assert(cabecalho.n_paginas_folhas == 0);
+
+    return true;
+}
+
+// Testa leCabecalhoPaginasRegistros()
+bool testLeCabecalhoPaginasRegistros() {
+    assert(itDeveLerCabecalhoVazio());
+
+    return true;
+}
+
+// Deve gravar cabecalho vazio
+bool itDeveGravarCabecalhoVazio() {
+    return true;
+}
+
+// Deve gravar cabecalho
+bool itDeveGravarCabecalho() {
+    return true;
+}
+
+// Test gravaCabecalhoPaginas()
+bool testGravaCabecalhoPaginas() {
+    assert(itDeveGravarCabecalhoVazio());
+    assert(itDeveGravarCabecalho());
+
+    return true;
 }
 
 // Gera stdout para ser testado
@@ -197,8 +256,11 @@ int main(int argc, char *argv[]) {
     }
 
     // Testes que não dependem de stdout
-    assert(testNewCabecalhoPaginasRegistros());
-    assert(testNewPaginaRegistros());
+//    assert(testNewCabecalhoPaginasRegistros());
+//    assert(testNewPaginaRegistros());
+//    assert(testCriarArquivoPaginas());
+//    assert(testLeCabecalhoPaginasRegistros());
+//    assert(testGravaCabecalhoPaginas());
 
     return EXIT_SUCCESS;
 }
