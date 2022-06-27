@@ -21,9 +21,7 @@ int cmpInteiro(const void *a_ptr, const void *b_ptr) {
 
     if (a > b) {
         return 1;
-    }
-
-    if (b < a) {
+    } else if (a < b) {
         return -1;
     }
 

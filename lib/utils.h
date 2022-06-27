@@ -1,3 +1,5 @@
+#pragma ide diagnostic ignored "readability-redundant-declaration"
+
 /**
  * Macros e outros utilitários comuns ao projeto
  */
