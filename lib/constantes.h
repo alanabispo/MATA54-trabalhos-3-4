@@ -19,6 +19,7 @@
 #define ARQUIVO_TAMANHO_INVALIDO    (-2)
 
 #define REGISTRO_INEXISTENTE        (-2)
+#define PAGINA_INEXISTENTE          (-2)
 
 #define ANO_VAZIO                   (-1)
 

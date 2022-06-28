@@ -8,9 +8,11 @@
 ## MATA54 - Estrutura de Dados e Algoritmos II
 ### Trabalhos 3 e 4 - Arvore K-D com busca de texto
 
-[![Open in Gitpod](https://img.shields.io/badge/click%20to%20-open%20in%20gitpod-orange?logo=gitpod)](https://gitpod.io/#https://github.com/alanabispo/MATA54-trabalho3-4)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/alanabispo/MATA54-trabalho3-4)
-![GitHub](https://img.shields.io/github/license/alanabispo/MATA54-trabalho3-4)
+[![Open in Gitpod](https://img.shields.io/badge/click%20to%20-open%20in%20gitpod-orange?logo=gitpod)](https://gitpod.io/#https://github.com/alanabispo/MATA54-trabalhos-3-4)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/alanabispo/MATA54-trabalhos-3-4)
+![GitHub](https://img.shields.io/github/license/alanabispo/MATA54-trabalhos-3-4)
+
+## [Link Repositório](https://github.com/alanabispo/MATA54-trabalhos-3-4)
 
 ## Introdução
 

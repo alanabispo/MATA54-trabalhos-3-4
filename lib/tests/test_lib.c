@@ -50,6 +50,8 @@ Registro leRegistroStdoutFile(FILE *stdout_file) {
     return registro;
 }
 
+// TODO colocar le pagina aqui
+
 // Verifica se os buffers do registro lido contem lixo
 bool validaBuffersRegistro(Registro *registro_lido, Registro *registro_comparar) {
     return assertBufferStr(registro_lido->nome_autor, TAMANHO_MAX_STRING + 1, registro_comparar->nome_autor) &&

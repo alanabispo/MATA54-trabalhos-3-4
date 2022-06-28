@@ -77,6 +77,15 @@ CabecalhoPaginasRegistros leCabecalhoPaginasRegistros();
 void gravaCabecalhoPaginas(CabecalhoPaginasRegistros *cabecalho);
 
 /**
+ * Compara se duas páginas são idênticas
+ *
+ * @param pag_a Página A
+ * @param pag_b Página B
+ * @return Se as páginas informadas são idênticas
+ */
+bool equalsPagina(PaginaRegistros *pag_a, PaginaRegistros *pag_b);
+
+/**
  * Le pagina de registros do arquivo de páginas
  *
  * @param pos posição do arquivo a ser lida

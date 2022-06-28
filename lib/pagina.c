@@ -1,7 +1,6 @@
 #pragma ide diagnostic ignored "misc-no-recursion"
 
 #include "pagina.h"
-#include "arvore_2d.h"
 #include "registro.h"
 #include "utils.h"
 
@@ -65,16 +64,47 @@ void gravaCabecalhoPaginas(CabecalhoPaginasRegistros *cabecalho) {
     fclose(arquivo);
 }
 
+// Compara duas páginas
+bool equalsPagina(PaginaRegistros *pag_a, PaginaRegistros *pag_b) {
+    if (pag_a->n_registros != pag_b->n_registros) {
+        return false;
+    }
+
+    // Compara os registros da página atual
+    int i;
+    for (i = 0; i < pag_a->n_registros; i++) {
+        if (!equalsRegistro(&pag_a->registros[i], &pag_b->registros[i])) {
+            return false;
+        }
+    }
+
+    // Verifica se existe próxima página. Se esta existe e olhamos o mesmo arq, são iguais
+    // TODO encontrar maneira segura de verificar recursivamente
+    //if (pag_a->prox_pagina != pag_b->prox_pagina) {
+    //    return false;
+    //}
+
+    return true;
+}
 
 // Le pagina de registros do arquivo de páginas
 PaginaRegistros lePagina(int pos) {
     FILE *arquivo = ABRIR_ARQUIVO_PAGINAS_LEITURA();
 
+    // Lê o cabecalho
+    CabecalhoPaginasRegistros cabecalho = newCabecalhoPaginasRegistros();
+    fread(&cabecalho, TAMANHO_CABECALHO_PAGINAS(), 1, arquivo);
+
     // Página que será retornada
     PaginaRegistros pagina = newPaginaRegistros();
 
+    // Pagina inexistente
+    if (pos >= cabecalho.total_paginas) {
+        pagina.n_registros = PAGINA_INEXISTENTE;
+        return pagina;
+    }
+
     // Caminha até a página desejada
-    fseek(arquivo, TAMANHO_CABECALHO_PAGINAS(), SEEK_CUR);
     fseek(arquivo, TAMANHO_PAGINA() * pos, SEEK_CUR);
 
     // Lê uma página

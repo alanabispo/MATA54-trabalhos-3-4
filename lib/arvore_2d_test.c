@@ -108,7 +108,7 @@ void initPaginas() {
 }
 
 // Remove arquivo paginas
-void removeArquivoPagina() {
+void removeArquivoPaginas() {
     remove(PATH_ARQUIVO_PAGINAS);
 }
 

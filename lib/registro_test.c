@@ -191,56 +191,6 @@ bool testEqualsRegistro() {
     return true;
 }
 
-// Gera stdout para ser testado
-void generateStdout() {
-    imprimeRegistro(&registro_a);
-    imprimeRegistro(&registro_b);
-    imprimeRegistro(&registro_c);
-    imprimeRegistro(&registro_d);
-}
-
-// Compara o registro a no arquivo
-bool itDeveImprimirRegistroCorretamenteA(FILE *stdout_file) {
-    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
-
-    return equalsRegistro(&registro_a, &reg_arquivo);
-}
-
-// Compara o registro b no arquivo
-bool itDeveImprimirRegistroCorretamenteB(FILE *stdout_file) {
-    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
-
-    return equalsRegistro(&registro_b, &reg_arquivo);
-}
-
-// Compara o registro c no arquivo
-bool itDeveImprimirRegistroCorretamenteC(FILE *stdout_file) {
-    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
-
-    return equalsRegistro(&registro_c, &reg_arquivo);
-}
-
-// Compara o registro d no arquivo
-bool itDeveImprimirRegistroCorretamenteD(FILE *stdout_file) {
-    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
-
-    return equalsRegistro(&registro_d, &reg_arquivo);
-}
-
-// Testa stdout gerados previamente
-bool testGeneratedStdout() {
-    FILE *stdout_file = fopen(stdout_filename, "r");
-
-    assert(itDeveImprimirRegistroCorretamenteA(stdout_file));
-    assert(itDeveImprimirRegistroCorretamenteB(stdout_file));
-    assert(itDeveImprimirRegistroCorretamenteC(stdout_file));
-    assert(itDeveImprimirRegistroCorretamenteD(stdout_file));
-
-    fclose(stdout_file);
-
-    return true;
-}
-
 // Deve criar um arquivo temporário
 bool itDeveCriarArquivoTmp() {
     criarArquivoTmp();
@@ -411,6 +361,56 @@ bool testLeRegistroTmp() {
     assert(itDeveIndicarErroRegistroInexistente());
     assert(itDeveLerRegistro());
     assert(itDeveLerRegistrosSemAlterarOutros());
+
+    return true;
+}
+
+// Gera stdout para ser testado
+void generateStdout() {
+    imprimeRegistro(&registro_a);
+    imprimeRegistro(&registro_b);
+    imprimeRegistro(&registro_c);
+    imprimeRegistro(&registro_d);
+}
+
+// Compara o registro a no arquivo
+bool itDeveImprimirRegistroCorretamenteA(FILE *stdout_file) {
+    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
+
+    return equalsRegistro(&registro_a, &reg_arquivo);
+}
+
+// Compara o registro b no arquivo
+bool itDeveImprimirRegistroCorretamenteB(FILE *stdout_file) {
+    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
+
+    return equalsRegistro(&registro_b, &reg_arquivo);
+}
+
+// Compara o registro c no arquivo
+bool itDeveImprimirRegistroCorretamenteC(FILE *stdout_file) {
+    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
+
+    return equalsRegistro(&registro_c, &reg_arquivo);
+}
+
+// Compara o registro d no arquivo
+bool itDeveImprimirRegistroCorretamenteD(FILE *stdout_file) {
+    Registro reg_arquivo = leRegistroStdoutFile(stdout_file);
+
+    return equalsRegistro(&registro_d, &reg_arquivo);
+}
+
+// Testa stdout gerados previamente
+bool testGeneratedStdout() {
+    FILE *stdout_file = fopen(stdout_filename, "r");
+
+    assert(itDeveImprimirRegistroCorretamenteA(stdout_file));
+    assert(itDeveImprimirRegistroCorretamenteB(stdout_file));
+    assert(itDeveImprimirRegistroCorretamenteC(stdout_file));
+    assert(itDeveImprimirRegistroCorretamenteD(stdout_file));
+
+    fclose(stdout_file);
 
     return true;
 }
