@@ -11,25 +11,25 @@
 // Cria um nó indice vazio
 NoIndice newNoIndice() {
     int i;
-    NoIndice noIndice;
+    NoIndice indice;
 
     // Inicializa os apontadores do índice
-    noIndice.esquerda = APONTADOR_VAZIO;
-    noIndice.direita = APONTADOR_VAZIO;
+    indice.esquerda = APONTADOR_VAZIO;
+    indice.direita = APONTADOR_VAZIO;
 
     // Inicializa outras propriedades
-    noIndice.ano = ANO_VAZIO;
-    noIndice.nivel = NIVEL_VAZIO;
-    noIndice.tipo = NO_VAZIO;
-    noIndice.tipo_direita = APONTAMENTO_VAZIO;
-    noIndice.tipo_esquerda = APONTAMENTO_VAZIO;
+    indice.ano = ANO_VAZIO;
+    indice.nivel = NIVEL_VAZIO;
+    indice.tipo = NO_VAZIO;
+    indice.tipo_direita = APONTAMENTO_VAZIO;
+    indice.tipo_esquerda = APONTAMENTO_VAZIO;
 
     // Zera vetores
     for (i = 0; i < (TAMANHO_MAX_STRING + 1); i++) {
-        noIndice.nome_autor[i] = '\0';
+        indice.nome_autor[i] = '\0';
     }
 
-    return noIndice;
+    return indice;
 }
 
 // Cria cabecalho de nos indices vazio
