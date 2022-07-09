@@ -1,3 +1,4 @@
+#pragma ide diagnostic ignored "OCUnusedMacroInspection"
 #pragma ide diagnostic ignored "readability-redundant-declaration"
 
 /**
