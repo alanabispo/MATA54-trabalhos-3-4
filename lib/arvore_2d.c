@@ -45,12 +45,11 @@ CabecalhoNosIndices newCabecalhoNosIndices() {
 void criarArquivoIndices() {
     FILE *arquivo = ABRIR_ARQUIVO_INDICES_ESCRITA();
 
-    // Cria indice raiz e armazena no arquivo
-    NoIndice no_raiz = newNoIndice();
-    no_raiz.nivel = NIVEL_RAIZ;
+    // Cria cabecalho e armazena no arquivo
+    CabecalhoNosIndices cabecalho = newCabecalhoNosIndices();
 
-    // Grava raiz no arquivo
-    fwrite(&no_raiz, TAMANHO_INDICE(), 1, arquivo);
+    // Grava cabeçalho no arquivo
+    fwrite(&cabecalho, TAMANHO_CABECALHO_INDICE(), 1, arquivo);
     fclose(arquivo);
 }
 
