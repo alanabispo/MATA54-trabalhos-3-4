@@ -92,7 +92,7 @@ endef
 test-alt: build-lib-alt build-test-alt
 	@echo "Executando testes..."
 	@# Executa Testes
-	@printf "1/10 Test #1: arvore_2d --- " && \
+	@printf "1/10 Test #1: arvore_2d_test --- " && \
 	( ( $(ALT_BUILD_FOLDER)/arvore_2d_test.o 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \
 	printf "2/10 Test #3: arvore_2d_test --generate-stdout --- " && \
 	( ( $(ALT_BUILD_FOLDER)/arvore_2d_test.o --generate-stdout > $(OUT_FILE) 2> $(LOG_FILE) && echo "PASSED") || ( $(call print_error) && exit 1 ) ) && \

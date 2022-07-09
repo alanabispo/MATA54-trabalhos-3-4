@@ -1,0 +1,8 @@
+//
+// Created by jeferson on 09/07/2022.
+//
+
+#ifndef MATA54_TRABALHOS_3_4_COMMON_H
+#define MATA54_TRABALHOS_3_4_COMMON_H
+
+#endif //MATA54_TRABALHOS_3_4_COMMON_H
