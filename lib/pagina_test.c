@@ -1,4 +1,5 @@
 #include "tests/test_lib.h"
+#include "tests/common.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,43 +20,7 @@ INICIA_TEST_FILE();
 
 const char stdout_filename[] = "out.txt";
 
-Registro registro_vazio = {
-        .nome_autor = "",
-        .ano = ANO_VAZIO,
-        .nome_arquivo = "",
-        .titulo = ""
-};
-
-Registro registro_a = {
-        .titulo = "titulo_a",
-        .nome_arquivo = "a.txt",
-        .nome_autor = "teste",
-        .ano = 2000
-};
-Registro registro_b = {
-        .titulo = "titulo_b",
-        .nome_arquivo = "b.txt",
-        .nome_autor = "teste",
-        .ano = 2001
-};
-Registro registro_c = {
-        .titulo = "titulo c - a volta",
-        .nome_arquivo = "c.txt",
-        .nome_autor = "testinho",
-        .ano = 2002
-};
-Registro registro_d = {
-        .titulo = "maktub",
-        .nome_arquivo = "ddd.txt",
-        .nome_autor = "paulo coelho",
-        .ano = 2003
-};
-Registro registro_e = {
-        .titulo = "Meio do Caminho",
-        .nome_arquivo = "eagora.txt",
-        .nome_autor = "Carlos Drummond",
-        .ano = 1967
-};
+MOCKS_REGISTRO();
 
 PaginaRegistros pagina_a;
 PaginaRegistros pagina_b;
@@ -98,70 +63,6 @@ void gravaMockPaginas() {
 // Remove arquivo tmp
 void removeArquivoPaginas() {
     remove(PATH_ARQUIVO_PAGINAS);
-}
-
-#define TAMANHO_LISTA_PAGINAS 10
-#define SEPARADOR_PAGINA "$$$$----$$$$"
-
-// Estrutura básica com lista de páginas
-typedef struct {
-    int tamanho;
-    PaginaRegistros paginas[TAMANHO_LISTA_PAGINAS];
-} ListaPaginaRegistros;
-
-// Lê página impressa em arquivo
-ListaPaginaRegistros lePaginaStdoutFile(FILE *stdout_file) {
-    int i;
-    char str_buf[50];
-    char pag_buf[10];
-
-    // Inicializa a página
-    ListaPaginaRegistros lista = { .tamanho = PAGINA_INEXISTENTE };
-    for (i = 0; i < TAMANHO_LISTA_PAGINAS; i++) {
-        lista.paginas[i] = newPaginaRegistros();
-    }
-
-    // Verifica linha de página
-    fscanf(stdout_file, "%[^\n]s", str_buf);
-    fscanf(stdout_file, "%*c");
-
-    int id_pagina;
-    sscanf(str_buf, "%s %d", pag_buf, &id_pagina);
-
-    // Verifica se temos um id de página
-    if (strcmp("pagina:", pag_buf) != 0) {
-        return lista;
-    }
-
-    long tam_buf;
-
-    // Incrementa e acessa página
-    lista.tamanho = 1;
-    PaginaRegistros *pagina = &lista.paginas[0];
-
-    // Enquanto não encontrarmos o separador de registros continua
-    do {
-        // Verifica se há espaço na página atual ou move para próxima
-        if (pagina->n_registros >= NREGSPORPAGINA) {
-            pagina->prox_pagina = lista.tamanho;
-            pagina = &lista.paginas[pagina->prox_pagina];
-            lista.tamanho++;
-        }
-
-        // Lê um registro
-        pagina->n_registros++;
-        pagina->registros[pagina->n_registros - 1] = leRegistroStdoutFile(stdout_file);
-
-        // Verifica se chegamos no separador final
-        fscanf(stdout_file, "%[^\n]s", str_buf);
-        tam_buf = (long)strlen(str_buf);
-        fseek(stdout_file, -tam_buf, SEEK_CUR);
-    } while (strcmp(str_buf, SEPARADOR_PAGINA) != 0 && lista.tamanho < TAMANHO_LISTA_PAGINAS);
-
-    // Avança o separador no arquivo + '\n'
-    fseek(stdout_file, tam_buf + 1, SEEK_CUR);
-
-    return lista;
 }
 
 // --------------- Testes -------------- //

@@ -6,6 +6,22 @@
 #include <stdbool.h>
 
 #include "../registro.h"
+#include "../pagina.h"
+
+// ------------- Constantes ------------- //
+
+#define TAMANHO_PADRAO_LISTA_PAGINAS 10
+#define SEPARADOR_PAGINA "$$$$----$$$$"
+
+// ------------- Estruturas ------------- //
+
+// Estrutura básica com lista de páginas
+typedef struct {
+    int tamanho;
+    PaginaRegistros paginas[TAMANHO_PADRAO_LISTA_PAGINAS];
+} ListaPaginaRegistros;
+
+// --------------- Helpers -------------- //
 
 /**
  * Inicializa um arquivo de teste, setando algumas propriedades necessárias para o correto funcionamento
@@ -13,7 +29,7 @@
 #define INICIA_TEST_FILE() \
     const char *PATH_ARQUIVO_INDICES = "test_trabalho.indices.dat"; \
     const char *PATH_ARQUIVO_PAGINAS = "test_trabalho.paginas.dat"; \
-    const char *PATH_ARQUIVO_TEMP    = "test_trabalho.tmp.dat";
+    const char *PATH_ARQUIVO_TEMP    = "test_trabalho.tmp.dat"
 
 /**
  * Copia string para buffer
@@ -42,14 +58,21 @@ void cleanBuffer(char *dest, int tam);
  */
 bool assertBufferStr(char *buf, size_t tam_buf, const char *exp_str);
 
-
 /**
- * Le um registro de formato de saida padrão do arquivo
+ * Le um registro de formato de saida padrão (stdout) salva em arquivo
  *
- * @param stdout_file Arquivo de saída
+ * @param stdout_file Arquivo de entrada gerado pela saída padrão
  * @return Retorna um registro obtido através da impressão num arquivo
  */
 Registro leRegistroStdoutFile(FILE *stdout_file);
+
+/**
+ * Lê páginas de formato de saída padrão (stdout) salvas em arquivo
+ *
+ * @param stdout_file Arquivo de entrada gerado pela saída padrão
+ * @return Retorna todas as páginas impressas no arquivo (no caso de páginas linkadas)
+ */
+ListaPaginaRegistros lePaginaStdoutFile(FILE *stdout_file);
 
 /**
  * Verifica se os buffers do registro lido contem lixo

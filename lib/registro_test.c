@@ -1,4 +1,5 @@
 #include "tests/test_lib.h"
+#include "tests/common.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,37 +19,7 @@ INICIA_TEST_FILE();
 
 const char stdout_filename[] = "out.txt";
 
-Registro registro_vazio = {
-        .nome_autor = "",
-        .ano = ANO_VAZIO,
-        .nome_arquivo = "",
-        .titulo = ""
-};
-
-Registro registro_a = {
-        .titulo = "titulo_a",
-        .nome_arquivo = "a.txt",
-        .nome_autor = "teste",
-        .ano = 2000
-};
-Registro registro_b = {
-        .titulo = "titulo_b",
-        .nome_arquivo = "b.txt",
-        .nome_autor = "teste",
-        .ano = 2000
-};
-Registro registro_c = {
-        .titulo = "titulo c - a volta",
-        .nome_arquivo = "c.txt",
-        .nome_autor = "testinho",
-        .ano = 2000
-};
-Registro registro_d = {
-        .titulo = "maktub",
-        .nome_arquivo = "ddd.txt",
-        .nome_autor = "paulo coelho",
-        .ano = 2000
-};
+MOCKS_REGISTRO();
 
 // -------------- Helpers -------------- //
 
