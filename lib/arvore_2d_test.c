@@ -1,4 +1,5 @@
 #include "tests/test_lib.h"
+#include "tests/common.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,68 +21,7 @@ INICIA_TEST_FILE();
 
 const char stdout_filename[] = "out.txt";
 
-Registro registro_vazio = {
-        .nome_autor = "",
-        .ano = ANO_VAZIO,
-        .nome_arquivo = "",
-        .titulo = ""
-};
-
-Registro registro_a = {
-        .titulo = "titulo_a",
-        .nome_arquivo = "a.txt",
-        .nome_autor = "teste",
-        .ano = 2000
-};
-Registro registro_b = {
-        .titulo = "titulo_b",
-        .nome_arquivo = "b.txt",
-        .nome_autor = "teste",
-        .ano = 2001
-};
-Registro registro_c = {
-        .titulo = "titulo c - a volta",
-        .nome_arquivo = "c.txt",
-        .nome_autor = "testinho",
-        .ano = 2002
-};
-Registro registro_d = {
-        .titulo = "maktub",
-        .nome_arquivo = "ddd.txt",
-        .nome_autor = "paulo coelho",
-        .ano = 2003
-};
-Registro registro_e = {
-        .titulo = "Meio do Caminho",
-        .nome_arquivo = "eagora.txt",
-        .nome_autor = "Carlos Drummond",
-        .ano = 1967
-};
-
-PaginaRegistros pagina_vazia = {
-        .registros = {
-                {
-                        .nome_autor = "",
-                        .ano = ANO_VAZIO,
-                        .nome_arquivo = "",
-                        .titulo = ""
-                },
-                {
-                        .nome_autor = "",
-                        .ano = ANO_VAZIO,
-                        .nome_arquivo = "",
-                        .titulo = ""
-                },
-                {
-                        .nome_autor = "",
-                        .ano = ANO_VAZIO,
-                        .nome_arquivo = "",
-                        .titulo = ""
-                }
-        },
-        .prox_pagina = REGISTRO_INEXISTENTE,
-        .n_registros = 0
-};
+MOCKS_REGISTRO();
 
 PaginaRegistros pagina_a;
 PaginaRegistros pagina_b;
@@ -107,20 +47,180 @@ void initPaginas() {
     pagina_c.registros[0] = registro_e;
 }
 
-// Remove arquivo paginas
-void removeArquivoPaginas() {
-    remove(PATH_ARQUIVO_PAGINAS);
-}
-
-// Remove arquivo arvore
-void removeArquivoArvore() {
-    remove(PATH_ARQUIVO_INDICES);
-}
-
 // --------------- Testes -------------- //
 
+// Deve criar noIndice vazio
+bool itDeveCriarNoIndiceVazio() {
+    NoIndice indice = newNoIndice();
 
+    assert(indice.direita == APONTADOR_VAZIO);
+    assert(indice.esquerda == APONTADOR_VAZIO);
 
+    assert(indice.ano == ANO_VAZIO);
+    assert(indice.nivel == NIVEL_VAZIO);
+
+    assert(indice.tipo == NO_VAZIO);
+    assert(indice.tipo_direita == APONTAMENTO_VAZIO);
+    assert(indice.tipo_esquerda == APONTAMENTO_VAZIO);
+
+    return assertBufferStr(indice.nome_autor, TAMANHO_MAX_STRING, "");
+}
+
+// Testa newNoIndice()
+bool testNewNoIndice() {
+    assert(itDeveCriarNoIndiceVazio());
+
+    return true;
+}
+
+// Deve criar cabecalho nos indices vazio
+bool itDeveCriarCabecalhoNosIndicesVazio() {
+    CabecalhoNosIndices cabecalho = newCabecalhoNosIndices();
+
+    return cabecalho.n_indices == 0;
+}
+
+// Testa newCabecalhoNosIndices()
+bool testNewCabecalhoNosIndices() {
+    assert(itDeveCriarCabecalhoNosIndicesVazio());
+
+    return true;
+}
+
+// Deve criar arquivo de indices
+bool itDeveCriarArquivoIndices() {
+    criarArquivoIndices();
+
+    assert(tamanhoArquivo(ARQUIVO_INDICE) == TAMANHO_INDICE());
+
+    FILE *arquivo = ABRIR_ARQUIVO_INDICES_LEITURA();
+    assert(arquivo != NULL);
+
+    NoIndice no_raiz = newNoIndice();
+    fread(&no_raiz, TAMANHO_INDICE(), 1, arquivo);
+    fclose(arquivo);
+
+    assert(no_raiz.nivel == NIVEL_RAIZ);
+
+    assert(no_raiz.direita == APONTADOR_VAZIO);
+    assert(no_raiz.esquerda == APONTADOR_VAZIO);
+    assert(no_raiz.ano == ANO_VAZIO);
+
+    assert(no_raiz.tipo == NO_VAZIO);
+    assert(no_raiz.tipo_direita == APONTAMENTO_VAZIO);
+    assert(no_raiz.tipo_esquerda == APONTAMENTO_VAZIO);
+
+    removeArquivoIndices();
+
+    return true;
+}
+
+// Testa criarArquivoIndices()
+bool testCriarArquivoIndices() {
+    assert(itDeveCriarArquivoIndices());
+
+    return true;
+}
+
+// Deve remover arquivo de indices
+bool itDeveRemoverArquivoIndices() {
+    criarArquivoIndices();
+
+    FILE *arquivo_indices = ABRIR_ARQUIVO_INDICES_LEITURA();
+    assert(arquivo_indices != NULL);
+    fclose(arquivo_indices);
+
+    removeArquivoIndices();
+    arquivo_indices = ABRIR_ARQUIVO_INDICES_LEITURA();
+    assert(arquivo_indices == NULL);
+
+    return true;
+}
+
+// Testa removeArquivoIndices()
+bool testRemoveArquivoIndices() {
+    assert(itDeveRemoverArquivoIndices());
+
+    return true;
+}
+
+// Deve ler cabecalho de indices vazio
+bool itDeveLeCabecalhoIndicesVazio() {
+    criarArquivoIndices();
+
+    CabecalhoNosIndices cabecalho = leCabecalhoIndices();
+    assert(cabecalho.n_indices == 0);
+
+    return true;
+}
+
+// Deve ler cabecalho de indices com valores
+bool itDeveLeCabecalhoIndices() {
+    CabecalhoNosIndices cabecalho = newCabecalhoNosIndices();
+    cabecalho.n_indices = 1;
+
+    FILE *arquivo = ABRIR_ARQUIVO_INDICES_ESCRITA();
+    fwrite(&cabecalho, TAMANHO_CABECALHO_INDICE(), 1, arquivo);
+    fclose(arquivo);
+
+    cabecalho = leCabecalhoIndices();
+    assert(cabecalho.n_indices == 1);
+
+    return true;
+}
+
+// Testa leCabecalhoIndices()
+bool testLeCabecalhoIndices() {
+    assert(itDeveLeCabecalhoIndicesVazio());
+    assert(itDeveLeCabecalhoIndices());
+
+    return true;
+}
+
+// TODO Testa leIndice()
+bool testLeIndice() {
+    return false;
+}
+
+// TODO Testa gravaCabecalhoIndices()
+bool testGravaCabecalhoIndices() {
+    return false;
+}
+
+// TODO Testa gravaIndice()
+bool testGravaIndice() {
+    return false;
+}
+
+// TODO Testa comparaNivel()
+bool testComparaNivel() {
+    return false;
+}
+
+// TODO Testa copiaNomeAutorIndice()
+bool testCopiaNomeAutorIndice() {
+    return false;
+}
+
+// TODO Testa incluirIndice()
+bool testIncluirIndice() {
+    return false;
+}
+
+// TODO Testa salvaRegistroPagina()
+bool testSalvaRegistroPagina() {
+    return false;
+}
+
+// TODO Testa moveRegistrosTmpPaginas()
+bool testMoveRegistrosTmpPaginas() {
+    return false;
+}
+
+// TODO Testa imprimeIndices()
+bool testImprimeIndices() {
+    return false;
+}
 
 // Gera stdout para ser testado
 void generateStdout() {
@@ -131,7 +231,7 @@ void generateStdout() {
 bool testGeneratedStdout() {
     FILE *stdout_file = fopen(stdout_filename, "r");
 
-    // TODO
+    assert(testImprimeIndices());
 
     fclose(stdout_file);
 
@@ -161,7 +261,19 @@ int main(int argc, char *argv[]) {
     }
 
     // Testes que não dependem de stdout
-    // TODO escrever testes
+    assert(testNewNoIndice());
+    assert(testNewCabecalhoNosIndices());
+    assert(testCriarArquivoIndices());
+    assert(testRemoveArquivoIndices());
+    assert(testLeCabecalhoIndices());
+    assert(testLeIndice());
+    assert(testGravaCabecalhoIndices());
+    assert(testGravaIndice());
+    assert(testComparaNivel());
+    assert(testCopiaNomeAutorIndice());
+    assert(testIncluirIndice());
+    assert(testSalvaRegistroPagina());
+    assert(testMoveRegistrosTmpPaginas());
 
     return EXIT_SUCCESS;
 }
