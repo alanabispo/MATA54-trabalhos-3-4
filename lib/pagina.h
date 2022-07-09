@@ -63,6 +63,11 @@ PaginaRegistros newPaginaRegistros();
 void criarArquivoPaginas();
 
 /**
+ * Deleta o arquivo de páginas
+ */
+void removeArquivoPaginas();
+
+/**
  * Le cabecalho das páginas
  *
  * @return cabecalho das pagina

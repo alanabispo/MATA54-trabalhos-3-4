@@ -92,6 +92,11 @@ CabecalhoNosIndices newCabecalhoNosIndices();
 void criarArquivoIndices();
 
 /**
+ * Deleta o arquivo de indices
+ */
+void removeArquivoIndices();
+
+/**
  * Le cabecalho dos indices
  *
  * @return cabecalho dos indices

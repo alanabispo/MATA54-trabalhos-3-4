@@ -60,6 +60,11 @@ void imprimeRegistro(Registro *registro);
 void criarArquivoTmp();
 
 /**
+ * Deleta o arquivo temporario
+ */
+void removeArquivoTmp();
+
+/**
  * Adiciona registro temporariamente
  *
  * @param registro

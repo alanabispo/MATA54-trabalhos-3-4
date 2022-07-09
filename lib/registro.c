@@ -44,6 +44,11 @@ void criarArquivoTmp() {
     fclose(arquivo);
 }
 
+// Deleta arquivo temporário
+void removeArquivoTmp() {
+    remove(PATH_ARQUIVO_TEMP);
+}
+
 // Adiciona registro temporariamente
 void adicionarRegistroTmp(int pos, Registro *registro) {
     FILE *arquivo = ABRIR_ARQUIVO_TMP_LEITURA_ESCRITA();

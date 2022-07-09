@@ -44,6 +44,11 @@ void criarArquivoPaginas() {
     fclose(arquivo);
 }
 
+// Remove arquivo paginas
+void removeArquivoPaginas() {
+    remove(PATH_ARQUIVO_PAGINAS);
+}
+
 // Le cabecalho das páginas
 CabecalhoPaginasRegistros leCabecalhoPaginasRegistros() {
     FILE *arquivo = ABRIR_ARQUIVO_PAGINAS_LEITURA();

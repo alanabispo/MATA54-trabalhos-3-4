@@ -54,6 +54,11 @@ void criarArquivoIndices() {
     fclose(arquivo);
 }
 
+// Deleta o arquivo de indices
+void removeArquivoIndices() {
+    remove(PATH_ARQUIVO_INDICES);
+}
+
 // Le cabecalho dos indices
 CabecalhoNosIndices leCabecalhoIndices() {
     FILE *arquivo = ABRIR_ARQUIVO_INDICES_LEITURA();
