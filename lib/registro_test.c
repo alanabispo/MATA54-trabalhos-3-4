@@ -182,6 +182,28 @@ bool testCriarArquivoTmp() {
     return true;
 }
 
+// Deve remover arquivo de páginas
+bool itDeveRemoverArquivoTmp() {
+    criarArquivoTmp();
+
+    FILE *arquivo_tmp = ABRIR_ARQUIVO_TMP_LEITURA();
+    assert(arquivo_tmp != NULL);
+    fclose(arquivo_tmp);
+
+    removeArquivoTmp();
+    arquivo_tmp = ABRIR_ARQUIVO_TMP_LEITURA();
+    assert(arquivo_tmp == NULL);
+
+    return true;
+}
+
+// Testa removeArquivoTmp()
+bool testRemoveArquivoTmp() {
+    assert(itDeveRemoverArquivoTmp());
+
+    return true;
+}
+
 // Deve adicionar um registro mesmo que vazio
 bool itDeveAdicionarRegistroVazio() {
     criarArquivoTmp();
@@ -410,6 +432,7 @@ int main(int argc, char *argv[]) {
     assert(testNewRegistro());
     assert(testEqualsRegistro());
     assert(testCriarArquivoTmp());
+    assert(testRemoveArquivoTmp());
     assert(testAdicionarRegistroTmp());
     assert(testLeRegistroTmp());
 

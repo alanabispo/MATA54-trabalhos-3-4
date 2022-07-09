@@ -60,11 +60,6 @@ void gravaMockPaginas() {
     fclose(arquivo);
 }
 
-// Remove arquivo tmp
-void removeArquivoPaginas() {
-    remove(PATH_ARQUIVO_PAGINAS);
-}
-
 // --------------- Testes -------------- //
 
 // Deve criar um cabecalho paginas vazio
@@ -132,6 +127,28 @@ bool testCriarArquivoPaginas() {
     return true;
 }
 
+// Deve remover arquivo de páginas
+bool itDeveRemoverArquivoPaginas() {
+    criarArquivoPaginas();
+
+    FILE *arquivo_paginas = ABRIR_ARQUIVO_PAGINAS_LEITURA();
+    assert(arquivo_paginas != NULL);
+    fclose(arquivo_paginas);
+
+    removeArquivoPaginas();
+    arquivo_paginas = ABRIR_ARQUIVO_PAGINAS_LEITURA();
+    assert(arquivo_paginas == NULL);
+
+    return true;
+}
+
+// Testa removeArquivoPaginas()
+bool testRemoveArquivoPaginas() {
+    assert(itDeveRemoverArquivoPaginas());
+
+    return true;
+}
+
 // Deve ler cabecalho vazio
 bool itDeveLerCabecalhoVazio() {
     criarArquivoPaginas();
@@ -185,7 +202,7 @@ bool itDeveGravarCabecalho() {
     return true;
 }
 
-// Test gravaCabecalhoPaginas()
+// Testa gravaCabecalhoPaginas()
 bool testGravaCabecalhoPaginas() {
     assert(itDeveGravarCabecalhoVazio());
     assert(itDeveGravarCabecalho());
@@ -281,7 +298,7 @@ bool itDeveLerChainPaginas() {
     return true;
 }
 
-// Test lePagina()
+// Testa lePagina()
 bool testLePagina() {
     assert(itDeveIndicarErroPaginaInexistente());
     assert(itDeveLerPagina());
@@ -481,6 +498,7 @@ int main(int argc, char *argv[]) {
     assert(testNewCabecalhoPaginasRegistros());
     assert(testNewPaginaRegistros());
     assert(testCriarArquivoPaginas());
+    assert(testRemoveArquivoPaginas());
     assert(testLeCabecalhoPaginasRegistros());
     assert(testGravaCabecalhoPaginas());
     assert(testEqualsPagina());
